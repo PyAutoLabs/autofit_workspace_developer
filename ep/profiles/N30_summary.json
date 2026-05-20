@@ -1,0 +1,10 @@
+{
+  "name": "N30",
+  "sampler": "DynestyStatic+Laplace(EP)",
+  "n_datasets": 30,
+  "wall_time_s": 1758.7042256000004,
+  "peak_rss_kb": 1149596,
+  "output_dir_bytes": 84664355,
+  "truth_log_likelihood_sum": -1500.5605499266132,
+  "sanity_pass": false
+}

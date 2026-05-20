@@ -1,0 +1,35 @@
+[
+  {
+    "name": "N3",
+    "sampler": "DynestyStatic",
+    "n_datasets": 3,
+    "wall_time_s": 22.7954490000011,
+    "peak_rss_kb": 569152,
+    "output_dir_bytes": 1165717,
+    "max_log_likelihood": -125.14263334344666,
+    "truth_log_likelihood_sum": -128.39683874532219,
+    "sanity_pass": true
+  },
+  {
+    "name": "N10",
+    "sampler": "DynestyStatic",
+    "n_datasets": 10,
+    "wall_time_s": 50.74623470000006,
+    "peak_rss_kb": 864280,
+    "output_dir_bytes": 3842990,
+    "max_log_likelihood": -519.3259230865922,
+    "truth_log_likelihood_sum": -472.2530881754556,
+    "sanity_pass": true
+  },
+  {
+    "name": "N30",
+    "sampler": "DynestyStatic",
+    "n_datasets": 30,
+    "wall_time_s": 132.83731699999953,
+    "peak_rss_kb": 3050040,
+    "output_dir_bytes": 13198672,
+    "max_log_likelihood": -1658.6547285227005,
+    "truth_log_likelihood_sum": -1500.5605499266132,
+    "sanity_pass": false
+  }
+]
