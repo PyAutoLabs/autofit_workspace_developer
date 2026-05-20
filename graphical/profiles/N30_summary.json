@@ -1,0 +1,11 @@
+{
+  "name": "N30",
+  "sampler": "DynestyStatic",
+  "n_datasets": 30,
+  "wall_time_s": 132.83731699999953,
+  "peak_rss_kb": 3050040,
+  "output_dir_bytes": 13198672,
+  "max_log_likelihood": -1658.6547285227005,
+  "truth_log_likelihood_sum": -1500.5605499266132,
+  "sanity_pass": false
+}

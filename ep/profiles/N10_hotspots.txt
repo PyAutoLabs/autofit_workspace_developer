@@ -1,0 +1,40 @@
+Wed May 20 12:55:37 2026    /home/jammy/Code/PyAutoLabs-wt/graphical-ep-scale-up/autofit_workspace_developer/ep/profiles/N10.pstats
+
+         456717346 function calls (449626412 primitive calls) in 723.928 seconds
+
+   Ordered by: cumulative time
+   List reduced from 21047 to 30 due to restriction <30>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+       50    0.011    0.000  516.895   10.338 abstract.py:148(_fit)
+      900    0.028    0.000  437.187    0.486 _core.py:60(__call__)
+      100    0.003    0.000  346.273    3.463 nest_plotters.py:13(corner_anesthetic)
+      900    0.111    0.000  343.885    0.382 _core.py:946(__call__)
+      100    0.013    0.000  301.243    3.012 abstract.py:367(run_search_internal)
+      100    0.331    0.003  299.896    2.999 sampler.py:920(run_nested)
+    32799    1.655    0.000  293.559    0.009 sampler.py:599(sample)
+    32699    0.837    0.000  285.047    0.009 sampler.py:413(_new_point)
+   190993    0.773    0.000  262.337    0.001 sampler.py:399(_get_point_value)
+   190993    7.488    0.000  261.442    0.001 sampler.py:336(_fill_queue)
+      100    0.010    0.000  244.666    2.447 samples.py:188(plot_2d)
+   477416    1.752    0.000  239.512    0.001 dynesty.py:905(__call__)
+   243708    1.827    0.000  184.627    0.001 abstract.py:648(vector_from_unit_vector)
+   238708    0.913    0.000  181.923    0.001 abstract.py:23(prior_transform)
+   731124    1.395    0.000  177.955    0.000 abstract.py:669(<lambda>)
+   176226    0.851    0.000  176.867    0.001 sampling.py:30(sample_unif)
+   487416    6.075    0.000  172.697    0.000 truncated_gaussian.py:136(value_for)
+      251    0.005    0.000  124.156    0.495 pyplot.py:1223(savefig)
+  1599610   57.022    0.000  116.428    0.000 _distn_infrastructure.py:2083(cdf)
+    78924    3.382    0.000  115.205    0.001 axis.py:1295(_update_ticks)
+      502    0.010    0.000  112.540    0.224 backend_agg.py:380(draw)
+      502    0.002    0.000  112.259    0.224 artist.py:93(draw_wrapper)
+125146/502    0.427    0.000  112.257    0.224 artist.py:54(draw_wrapper)
+      502    0.013    0.000  112.253    0.224 figure.py:3142(draw)
+ 3206/502    0.065    0.000  111.488    0.222 image.py:114(_draw_list_compositing_images)
+     2704    0.087    0.000  111.455    0.041 _base.py:3072(draw)
+      100    0.002    0.000  101.325    1.013 plot_util.py:45(output_figure)
+   487416   23.449    0.000   89.779    0.000 _distn_infrastructure.py:2253(ppf)
+      900    0.016    0.000   83.592    0.093 __init__.py:58(plot)
+      900    0.041    0.000   81.769    0.091 core.py:497(generate)
+
+

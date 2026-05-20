@@ -1,0 +1,40 @@
+Wed May 20 12:43:31 2026    /home/jammy/Code/PyAutoLabs-wt/graphical-ep-scale-up/autofit_workspace_developer/graphical/profiles/N10.pstats
+
+         31975873 function calls (31599338 primitive calls) in 59.671 seconds
+
+   Ordered by: cumulative time
+   List reduced from 19663 to 30 due to restriction <30>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+   5067/1    0.300    0.000   48.688   48.688 {built-in method builtins.exec}
+      3/2    0.001    0.000   46.199   23.099 fit.py:1(<module>)
+      2/1    0.001    0.000   46.122   46.122 fit.py:43(fit)
+      2/1    0.000    0.000   46.059   46.059 abstract_search.py:427(fit)
+      2/1    0.000    0.000   45.797   45.797 abstract_search.py:101(decorated)
+      2/1    0.000    0.000   45.795   45.795 abstract_search.py:627(start_resume_fit)
+      434    0.020    0.000   45.003    0.104 __init__.py:1(<module>)
+        1    0.000    0.000   36.131   36.131 abstract.py:148(_fit)
+        2    0.000    0.000   26.721   13.361 abstract.py:367(run_search_internal)
+        2    0.006    0.003   26.675   13.337 sampler.py:920(run_nested)
+      443    0.030    0.000   26.480    0.060 sampler.py:599(sample)
+      441    0.014    0.000   26.336    0.060 sampler.py:413(_new_point)
+     2160    0.013    0.000   26.179    0.012 sampler.py:399(_get_point_value)
+     2160    0.103    0.000   26.165    0.012 sampler.py:336(_fill_queue)
+     5182    0.030    0.000   25.772    0.005 dynesty.py:905(__call__)
+     2641    0.090    0.000   23.207    0.009 abstract.py:648(vector_from_unit_vector)
+    55461    0.124    0.000   22.934    0.000 abstract.py:669(<lambda>)
+     2591    0.020    0.000   22.903    0.009 abstract.py:23(prior_transform)
+    52820    0.674    0.000   22.735    0.000 truncated_gaussian.py:136(value_for)
+   184200    7.253    0.000   19.553    0.000 _distn_infrastructure.py:2083(cdf)
+        2    0.000    0.000   18.882    9.441 abstract_search.py:982(perform_update)
+        2    0.001    0.000   18.879    9.440 updater.py:67(update)
+     1910    0.014    0.000   16.966    0.009 sampling.py:30(sample_unif)
+        2    0.000    0.000   11.728    5.864 updater.py:125(visualize)
+        5    0.001    0.000   10.847    2.169 collection.py:171(_for_each_analysis)
+       36    0.000    0.000   10.825    0.301 analysis.py:132(method)
+   250560    1.790    0.000   10.488    0.000 _distn_infrastructure.py:600(argsreduce)
+    52820    2.592    0.000    9.841    0.000 _distn_infrastructure.py:2253(ppf)
+        4    0.000    0.000    9.252    2.313 abstract_search.py:1076(samples_from)
+        4    0.003    0.001    9.252    2.313 abstract.py:283(samples_via_internal_from)
+
+

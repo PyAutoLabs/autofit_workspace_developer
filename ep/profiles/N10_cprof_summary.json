@@ -1,0 +1,10 @@
+{
+  "name": "N10_cprof",
+  "sampler": "DynestyStatic+Laplace(EP)",
+  "n_datasets": 10,
+  "wall_time_s": 720.1814909999994,
+  "peak_rss_kb": 721900,
+  "output_dir_bytes": 28271160,
+  "truth_log_likelihood_sum": -472.2530881754556,
+  "sanity_pass": true
+}
