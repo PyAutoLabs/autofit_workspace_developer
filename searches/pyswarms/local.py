@@ -11,22 +11,22 @@ class PySwarmsLocal(AbstractPySwarms):
         "social",
         "inertia",
         "number_of_k_neighbors",
-        "minkowski_p_norm"
+        "minkowski_p_norm",
     )
 
     def __init__(
-            self,
-            name: Optional[str] = None,
-            path_prefix: Optional[str] = None,
-            unique_tag: Optional[str] = None,
-            number_of_k_neighbors: int = 3,
-            minkowski_p_norm: int = 2,
-            iterations_per_quick_update: int = None,
-            iterations_per_full_update: int = None,
-            number_of_cores: int = 1,
-            silence: bool = False,
-            session: Optional[sa.orm.Session] = None,
-            **kwargs
+        self,
+        name: Optional[str] = None,
+        path_prefix: Optional[str] = None,
+        unique_tag: Optional[str] = None,
+        number_of_k_neighbors: int = 3,
+        minkowski_p_norm: int = 2,
+        iterations_per_quick_update: int = None,
+        iterations_per_full_update: int = None,
+        number_of_cores: int = 1,
+        silence: bool = False,
+        session: Optional[sa.orm.Session] = None,
+        **kwargs
     ):
         """
         A PySwarms Particle Swarm MLE local-best non-linear search.

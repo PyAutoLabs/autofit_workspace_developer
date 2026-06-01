@@ -16,6 +16,7 @@ changed`` error, reinstall UltraNest so it recompiles:
 The search class in this directory (search.py) imports from autofit's base
 classes and can be used as a drop-in replacement.
 """
+
 import numpy as np
 
 from autoconf import conf
@@ -31,6 +32,7 @@ import autofit as af
 from pathlib import Path
 
 # --- Define a simple 1D Gaussian model ---
+
 
 class Gaussian:
     def __init__(
@@ -61,6 +63,7 @@ noise_map = np.full(data.shape, 0.1)
 
 
 # --- Define the Analysis class ---
+
 
 class Analysis(af.Analysis):
     def __init__(self, data, noise_map):

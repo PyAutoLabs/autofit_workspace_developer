@@ -39,8 +39,7 @@ class FitnessPySwarms(Fitness):
             parameters = [parameters]
 
         figure_of_merit_list = [
-            self.call_wrap(params_of_particle)
-            for params_of_particle in parameters
+            self.call_wrap(params_of_particle) for params_of_particle in parameters
         ]
 
         return np.asarray(figure_of_merit_list)
@@ -177,9 +176,7 @@ class AbstractPySwarms(AbstractMLE):
                 n_cores=self.number_of_cores,
             )
 
-            init_pos = np.zeros(
-                shape=(self.n_particles, model.prior_count)
-            )
+            init_pos = np.zeros(shape=(self.n_particles, model.prior_count))
 
             for index, parameters in enumerate(parameter_lists):
                 init_pos[index, :] = np.asarray(parameters)
@@ -214,9 +211,7 @@ class AbstractPySwarms(AbstractMLE):
             iterations = min(self.iterations_per_full_update, iterations_remaining)
 
             if iterations > 0:
-                search_internal.optimize(
-                    objective_func=fitness, iters=int(iterations)
-                )
+                search_internal.optimize(objective_func=fitness, iters=int(iterations))
 
                 total_iterations += iterations
 

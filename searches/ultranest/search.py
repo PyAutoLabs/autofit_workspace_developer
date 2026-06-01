@@ -10,6 +10,7 @@ from autofit.non_linear.samples.sample import Sample
 from autofit.non_linear.samples.nest import SamplesNest
 from autofit.non_linear.test_mode import is_test_mode
 
+
 class UltraNest(abstract_nest.AbstractNest):
     __identifier_fields__ = (
         "draw_multiple",
@@ -19,54 +20,54 @@ class UltraNest(abstract_nest.AbstractNest):
         "cluster_num_live_points",
         "insertion_test_zscore_threshold",
         "stepsampler_cls",
-        "nsteps"
+        "nsteps",
     )
 
     def __init__(
-            self,
-            name: Optional[str] = None,
-            path_prefix: Optional[str] = None,
-            unique_tag: Optional[str] = None,
-            draw_multiple: bool = True,
-            ndraw_min: int = 128,
-            ndraw_max: int = 65536,
-            num_bootstraps: int = 30,
-            num_test_samples: int = 2,
-            resume: bool = True,
-            run_num: Optional[int] = None,
-            storage_backend: str = "hdf5",
-            vectorized: bool = False,
-            warmstart_max_tau: float = -1.0,
-            min_num_live_points: int = 400,
-            cluster_num_live_points: int = 40,
-            insertion_test_window: int = 10,
-            insertion_test_zscore_threshold: int = 2,
-            dlogz: float = 0.5,
-            dkl: float = 0.5,
-            frac_remain: float = 0.01,
-            lepsilon: float = 0.001,
-            min_ess: int = 400,
-            max_iters: Optional[int] = None,
-            max_ncalls: Optional[int] = None,
-            max_num_improvement_loops: float = -1.0,
-            log_interval: Optional[int] = None,
-            show_status: bool = True,
-            update_interval_ncall: Optional[int] = None,
-            update_interval_volume_fraction: float = 0.8,
-            viz_callback: str = "auto",
-            stepsampler_cls: Optional[str] = None,
-            nsteps: int = 25,
-            adaptive_nsteps: bool = False,
-            log: bool = False,
-            max_nsteps: int = 1000,
-            region_filter: bool = False,
-            scale: float = 1.0,
-            iterations_per_quick_update: int = None,
-            iterations_per_full_update: int = None,
-            number_of_cores: int = 1,
-            silence: bool = False,
-            session: Optional[sa.orm.Session] = None,
-            **kwargs
+        self,
+        name: Optional[str] = None,
+        path_prefix: Optional[str] = None,
+        unique_tag: Optional[str] = None,
+        draw_multiple: bool = True,
+        ndraw_min: int = 128,
+        ndraw_max: int = 65536,
+        num_bootstraps: int = 30,
+        num_test_samples: int = 2,
+        resume: bool = True,
+        run_num: Optional[int] = None,
+        storage_backend: str = "hdf5",
+        vectorized: bool = False,
+        warmstart_max_tau: float = -1.0,
+        min_num_live_points: int = 400,
+        cluster_num_live_points: int = 40,
+        insertion_test_window: int = 10,
+        insertion_test_zscore_threshold: int = 2,
+        dlogz: float = 0.5,
+        dkl: float = 0.5,
+        frac_remain: float = 0.01,
+        lepsilon: float = 0.001,
+        min_ess: int = 400,
+        max_iters: Optional[int] = None,
+        max_ncalls: Optional[int] = None,
+        max_num_improvement_loops: float = -1.0,
+        log_interval: Optional[int] = None,
+        show_status: bool = True,
+        update_interval_ncall: Optional[int] = None,
+        update_interval_volume_fraction: float = 0.8,
+        viz_callback: str = "auto",
+        stepsampler_cls: Optional[str] = None,
+        nsteps: int = 25,
+        adaptive_nsteps: bool = False,
+        log: bool = False,
+        max_nsteps: int = 1000,
+        region_filter: bool = False,
+        scale: float = 1.0,
+        iterations_per_quick_update: int = None,
+        iterations_per_full_update: int = None,
+        number_of_cores: int = 1,
+        silence: bool = False,
+        session: Optional[sa.orm.Session] = None,
+        **kwargs
     ):
         """
         An UltraNest non-linear search.
@@ -227,7 +228,7 @@ class UltraNest(abstract_nest.AbstractNest):
             analysis=analysis,
             paths=self.paths,
             fom_is_log_likelihood=True,
-            resample_figure_of_merit=-1.0e99
+            resample_figure_of_merit=-1.0e99,
         )
 
         def prior_transform(cube):
@@ -280,20 +281,17 @@ class UltraNest(abstract_nest.AbstractNest):
                 run_kwargs = self.run_kwargs
                 run_kwargs["update_interval_ncall"] = iterations
 
-                search_internal.run(
-                    max_ncalls=iterations,
-                    **run_kwargs
-                )
+                search_internal.run(max_ncalls=iterations, **run_kwargs)
 
             self.paths.save_search_internal(
-                  obj=search_internal.results,
-              )
+                obj=search_internal.results,
+            )
 
             iterations_after_run = search_internal.ncall
 
             if (
-                    total_iterations == iterations_after_run
-                    or iterations_after_run == self.max_ncalls
+                total_iterations == iterations_after_run
+                or iterations_after_run == self.max_ncalls
             ):
                 finished = True
 
@@ -304,7 +302,7 @@ class UltraNest(abstract_nest.AbstractNest):
                     analysis=analysis,
                     during_analysis=True,
                     fitness=fitness,
-                    search_internal=search_internal
+                    search_internal=search_internal,
                 )
 
         return search_internal, fitness
@@ -334,10 +332,12 @@ class UltraNest(abstract_nest.AbstractNest):
             "total_samples": search_internal["ncall"],
             "total_accepted_samples": len(search_internal["weighted_samples"]["logl"]),
             "time": self.timer.time if self.timer else None,
-            "number_live_points": self.min_num_live_points
+            "number_live_points": self.min_num_live_points,
         }
 
-    def samples_via_internal_from(self, model: AbstractPriorModel, search_internal=None):
+    def samples_via_internal_from(
+        self, model: AbstractPriorModel, search_internal=None
+    ):
         """
         Returns a `Samples` object from the ultranest internal results.
 
@@ -358,7 +358,8 @@ class UltraNest(abstract_nest.AbstractNest):
         parameters = search_internal["weighted_samples"]["points"]
         log_likelihood_list = search_internal["weighted_samples"]["logl"]
         log_prior_list = [
-            sum(model.log_prior_list_from_vector(vector=vector)) for vector in parameters
+            sum(model.log_prior_list_from_vector(vector=vector))
+            for vector in parameters
         ]
         weight_list = search_internal["weighted_samples"]["weights"]
 
@@ -367,7 +368,7 @@ class UltraNest(abstract_nest.AbstractNest):
             parameter_lists=parameters,
             log_likelihood_list=log_likelihood_list,
             log_prior_list=log_prior_list,
-            weight_list=weight_list
+            weight_list=weight_list,
         )
 
         return SamplesNest(

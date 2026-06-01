@@ -14,17 +14,17 @@ class PySwarmsGlobal(AbstractPySwarms):
     )
 
     def __init__(
-            self,
-            name: Optional[str] = None,
-            path_prefix: Optional[str] = None,
-            unique_tag: Optional[str] = None,
-            initializer: Optional[AbstractInitializer] = None,
-            iterations_per_full_update: int = None,
-            iterations_per_quick_update: int = None,
-            number_of_cores: int = 1,
-            silence: bool = False,
-            session: Optional[sa.orm.Session] = None,
-            **kwargs
+        self,
+        name: Optional[str] = None,
+        path_prefix: Optional[str] = None,
+        unique_tag: Optional[str] = None,
+        initializer: Optional[AbstractInitializer] = None,
+        iterations_per_full_update: int = None,
+        iterations_per_quick_update: int = None,
+        number_of_cores: int = 1,
+        silence: bool = False,
+        session: Optional[sa.orm.Session] = None,
+        **kwargs
     ):
         """
         A PySwarms Particle Swarm MLE global-best non-linear search.
