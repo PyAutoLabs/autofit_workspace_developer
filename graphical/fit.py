@@ -73,9 +73,9 @@ def fit(args):
         gaussian = af.Model(af.ex.Gaussian)
         gaussian.centre = centre_shared_prior
         gaussian.normalization = af.TruncatedGaussianPrior(
-            mean=0.5, sigma=2.0, lower_limit=0.0)
-        gaussian.sigma = af.TruncatedGaussianPrior(
-            mean=5.0, sigma=5.0, lower_limit=0.0)
+            mean=0.5, sigma=2.0, lower_limit=0.0
+        )
+        gaussian.sigma = af.TruncatedGaussianPrior(mean=5.0, sigma=5.0, lower_limit=0.0)
         model_list.append(af.Collection(gaussian=gaussian))
 
     analysis_factor_list = [
@@ -93,8 +93,7 @@ def fit(args):
 
     rss_before = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
     t0 = time.perf_counter()
-    result = search.fit(model=factor_graph.global_prior_model,
-                        analysis=factor_graph)
+    result = search.fit(model=factor_graph.global_prior_model, analysis=factor_graph)
     wall_time = time.perf_counter() - t0
     rss_after = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
     peak_rss_kb = max(rss_before, rss_after)
@@ -110,29 +109,37 @@ def fit(args):
     centre_mean = float(median_instance[0].gaussian.centre)
     centre_lower, centre_upper = errors_instance[0].gaussian.centre
     centre_sigma = float((centre_lower + centre_upper) / 2.0)
-    sanity.append(check_parameter_recovery(
-        "shared centre", centre_mean, centre_sigma, truths[0]["centre"]))
+    sanity.append(
+        check_parameter_recovery(
+            "shared centre", centre_mean, centre_sigma, truths[0]["centre"]
+        )
+    )
 
     # Per-dataset normalization and sigma.
     for i, gt in enumerate(truths):
         norm_mean = float(median_instance[i].gaussian.normalization)
         nl, nu = errors_instance[i].gaussian.normalization
         norm_sigma = float((nl + nu) / 2.0)
-        sanity.append(check_parameter_recovery(
-            f"dset_{i} normalization", norm_mean, norm_sigma,
-            gt["normalization"]))
+        sanity.append(
+            check_parameter_recovery(
+                f"dset_{i} normalization", norm_mean, norm_sigma, gt["normalization"]
+            )
+        )
 
         sig_mean = float(median_instance[i].gaussian.sigma)
         sl, su = errors_instance[i].gaussian.sigma
         sig_sigma = float((sl + su) / 2.0)
-        sanity.append(check_parameter_recovery(
-            f"dset_{i} sigma", sig_mean, sig_sigma, gt["sigma"]))
+        sanity.append(
+            check_parameter_recovery(
+                f"dset_{i} sigma", sig_mean, sig_sigma, gt["sigma"]
+            )
+        )
 
-    sanity.append(check_max_log_likelihood(
-        max_log_likelihood, truth_ll_sum, len(truths)))
+    sanity.append(
+        check_max_log_likelihood(max_log_likelihood, truth_ll_sum, len(truths))
+    )
 
-    sanity_pass = print_sanity_summary(
-        sanity, header=f"graphical N={len(truths)}")
+    sanity_pass = print_sanity_summary(sanity, header=f"graphical N={len(truths)}")
 
     output_path = PACKAGE_ROOT / "output" / args.sample / run_name
     disk_bytes = output_dir_bytes(output_path)

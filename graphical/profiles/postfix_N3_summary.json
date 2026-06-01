@@ -1,0 +1,11 @@
+{
+  "name": "postfix_N3",
+  "sampler": "DynestyStatic",
+  "n_datasets": 3,
+  "wall_time_s": 5.640972900000634,
+  "peak_rss_kb": 579932,
+  "output_dir_bytes": 1161275,
+  "max_log_likelihood": -125.24028760924435,
+  "truth_log_likelihood_sum": -128.39683874532219,
+  "sanity_pass": true
+}

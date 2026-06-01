@@ -1,0 +1,11 @@
+{
+  "name": "postfix_N10",
+  "sampler": "DynestyStatic",
+  "n_datasets": 10,
+  "wall_time_s": 14.934478999999556,
+  "peak_rss_kb": 865132,
+  "output_dir_bytes": 3819993,
+  "max_log_likelihood": -519.881225446655,
+  "truth_log_likelihood_sum": -472.2530881754556,
+  "sanity_pass": true
+}
