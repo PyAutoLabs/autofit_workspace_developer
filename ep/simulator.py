@@ -22,6 +22,7 @@ import json
 from pathlib import Path
 
 import matplotlib
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
@@ -61,12 +62,12 @@ def simulate_dataset(dataset_index, dataset_path):
 
     dataset_path.mkdir(parents=True, exist_ok=True)
 
-    af.util.numpy_array_to_json(array=data,
-                                file_path=dataset_path / "data.json",
-                                overwrite=True)
-    af.util.numpy_array_to_json(array=noise_map,
-                                file_path=dataset_path / "noise_map.json",
-                                overwrite=True)
+    af.util.numpy_array_to_json(
+        array=data, file_path=dataset_path / "data.json", overwrite=True
+    )
+    af.util.numpy_array_to_json(
+        array=noise_map, file_path=dataset_path / "noise_map.json", overwrite=True
+    )
 
     # Truth-evaluated log likelihood: what a perfect-knowledge oracle
     # would compute for THIS noisy realisation. The fit's max log
@@ -75,15 +76,19 @@ def simulate_dataset(dataset_index, dataset_path):
     truth_log_likelihood = float(analysis.log_likelihood_function(instance=gaussian))
 
     with open(dataset_path / "ground_truth.json", "w") as f:
-        json.dump({
-            "centre": TRUE_CENTRE,
-            "normalization": TRUE_NORMALIZATION,
-            "sigma": TRUE_SIGMA,
-            "n_pixels": N_PIXELS,
-            "signal_to_noise_ratio": SIGNAL_TO_NOISE_RATIO,
-            "noise_sigma": NOISE_SIGMA,
-            "truth_log_likelihood": truth_log_likelihood,
-        }, f, indent=2)
+        json.dump(
+            {
+                "centre": TRUE_CENTRE,
+                "normalization": TRUE_NORMALIZATION,
+                "sigma": TRUE_SIGMA,
+                "n_pixels": N_PIXELS,
+                "signal_to_noise_ratio": SIGNAL_TO_NOISE_RATIO,
+                "noise_sigma": NOISE_SIGMA,
+                "truth_log_likelihood": truth_log_likelihood,
+            },
+            f,
+            indent=2,
+        )
 
     info = {
         "domain": "toy",
@@ -102,8 +107,16 @@ def simulate_dataset(dataset_index, dataset_path):
         except (TypeError, ValueError):
             pass
 
-    plt.errorbar(x=xvalues, y=data, yerr=noise_map, linestyle="",
-                 color="k", ecolor="k", elinewidth=1, capsize=2)
+    plt.errorbar(
+        x=xvalues,
+        y=data,
+        yerr=noise_map,
+        linestyle="",
+        color="k",
+        ecolor="k",
+        elinewidth=1,
+        capsize=2,
+    )
     plt.title(f"dataset_{dataset_index} (truth centre={TRUE_CENTRE})")
     plt.xlabel("xvalues")
     plt.ylabel("profile normalization")
@@ -130,14 +143,18 @@ def main():
     sample_meta_path = sample_path / "_sample"
     sample_meta_path.mkdir(parents=True, exist_ok=True)
     with open(sample_meta_path / "ground_truth.json", "w") as f:
-        json.dump({
-            "shared_centre": TRUE_CENTRE,
-            "true_normalization": TRUE_NORMALIZATION,
-            "true_sigma": TRUE_SIGMA,
-            "n_datasets": args.total_datasets,
-            "total_truth_log_likelihood": float(sum(truth_lls)),
-            "per_dataset_truth_log_likelihoods": [float(v) for v in truth_lls],
-        }, f, indent=2)
+        json.dump(
+            {
+                "shared_centre": TRUE_CENTRE,
+                "true_normalization": TRUE_NORMALIZATION,
+                "true_sigma": TRUE_SIGMA,
+                "n_datasets": args.total_datasets,
+                "total_truth_log_likelihood": float(sum(truth_lls)),
+                "per_dataset_truth_log_likelihoods": [float(v) for v in truth_lls],
+            },
+            f,
+            indent=2,
+        )
 
     print(f"Simulated {args.total_datasets} datasets -> {sample_path}/")
     print(f"  total truth log likelihood: {sum(truth_lls):.3f}")

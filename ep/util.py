@@ -25,8 +25,9 @@ def parse_sample_args(default_total=30):
     parser.add_argument("--total_datasets", type=int, default=default_total)
     parser.add_argument("--use_cpu", action="store_true")
     parser.add_argument("--number_of_cores", type=int, default=1)
-    parser.add_argument("--name", default=None,
-                        help="Autofit run name (default: derived from N).")
+    parser.add_argument(
+        "--name", default=None, help="Autofit run name (default: derived from N)."
+    )
     return parser.parse_args()
 
 
@@ -45,7 +46,8 @@ def discover_datasets(sample_path):
     Skips `_sample/` and any other underscore-prefixed entries.
     """
     dirs = [
-        d.name for d in sorted(sample_path.iterdir())
+        d.name
+        for d in sorted(sample_path.iterdir())
         if d.is_dir() and not d.name.startswith("_")
     ]
     dirs.sort(key=lambda x: int(x.split("_")[-1]) if x.split("_")[-1].isdigit() else x)

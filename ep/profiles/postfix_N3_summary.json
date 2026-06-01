@@ -1,0 +1,10 @@
+{
+  "name": "postfix_N3",
+  "sampler": "DynestyStatic+Laplace(EP)",
+  "n_datasets": 3,
+  "wall_time_s": 76.32506300000023,
+  "peak_rss_kb": 618836,
+  "output_dir_bytes": 8479567,
+  "truth_log_likelihood_sum": -128.39683874532219,
+  "sanity_pass": true
+}

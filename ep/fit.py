@@ -70,9 +70,9 @@ def fit(args):
         gaussian = af.Model(af.ex.Gaussian)
         gaussian.centre = centre_shared_prior
         gaussian.normalization = af.TruncatedGaussianPrior(
-            mean=0.5, sigma=2.0, lower_limit=0.0)
-        gaussian.sigma = af.TruncatedGaussianPrior(
-            mean=5.0, sigma=5.0, lower_limit=0.0)
+            mean=0.5, sigma=2.0, lower_limit=0.0
+        )
+        gaussian.sigma = af.TruncatedGaussianPrior(mean=5.0, sigma=5.0, lower_limit=0.0)
         model_list.append(af.Collection(gaussian=gaussian))
 
     paths = af.DirectoryPaths(
@@ -83,8 +83,10 @@ def fit(args):
 
     analysis_factor_list = [
         af.AnalysisFactor(
-            prior_model=model, analysis=analysis,
-            optimiser=search, name=f"dataset_{i}",
+            prior_model=model,
+            analysis=analysis,
+            optimiser=search,
+            name=f"dataset_{i}",
         )
         for i, (model, analysis) in enumerate(zip(model_list, analysis_list))
     ]
@@ -95,8 +97,10 @@ def fit(args):
     rss_before = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
     t0 = time.perf_counter()
     result = factor_graph.optimise(
-        optimiser=laplace, paths=paths,
-        ep_history=af.EPHistory(kl_tol=0.05), max_steps=5,
+        optimiser=laplace,
+        paths=paths,
+        ep_history=af.EPHistory(kl_tol=0.05),
+        max_steps=5,
     )
     wall_time = time.perf_counter() - t0
     rss_after = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
@@ -106,25 +110,36 @@ def fit(args):
 
     sanity = []
     centre_msg = mean_field[centre_shared_prior]
-    sanity.append(check_parameter_recovery(
-        "shared centre",
-        float(centre_msg.mean), float(centre_msg.sigma),
-        truths[0]["centre"]))
+    sanity.append(
+        check_parameter_recovery(
+            "shared centre",
+            float(centre_msg.mean),
+            float(centre_msg.sigma),
+            truths[0]["centre"],
+        )
+    )
 
     for i, (model, gt) in enumerate(zip(model_list, truths)):
         norm_msg = mean_field[model.gaussian.normalization]
-        sanity.append(check_parameter_recovery(
-            f"dset_{i} normalization",
-            float(norm_msg.mean), float(norm_msg.sigma),
-            gt["normalization"]))
+        sanity.append(
+            check_parameter_recovery(
+                f"dset_{i} normalization",
+                float(norm_msg.mean),
+                float(norm_msg.sigma),
+                gt["normalization"],
+            )
+        )
         sig_msg = mean_field[model.gaussian.sigma]
-        sanity.append(check_parameter_recovery(
-            f"dset_{i} sigma",
-            float(sig_msg.mean), float(sig_msg.sigma),
-            gt["sigma"]))
+        sanity.append(
+            check_parameter_recovery(
+                f"dset_{i} sigma",
+                float(sig_msg.mean),
+                float(sig_msg.sigma),
+                gt["sigma"],
+            )
+        )
 
-    sanity_pass = print_sanity_summary(
-        sanity, header=f"EP N={len(truths)}")
+    sanity_pass = print_sanity_summary(sanity, header=f"EP N={len(truths)}")
 
     output_path = PACKAGE_ROOT / "output" / args.sample / run_name
     disk_bytes = output_dir_bytes(output_path)
@@ -137,8 +152,7 @@ def fit(args):
         wall_time_s=wall_time,
         peak_rss_kb=peak_rss_kb,
         output_dir_bytes=disk_bytes,
-        truth_log_likelihood_sum=float(
-            sum(g["truth_log_likelihood"] for g in truths)),
+        truth_log_likelihood_sum=float(sum(g["truth_log_likelihood"] for g in truths)),
         sanity_pass=sanity_pass,
     )
 
