@@ -12,6 +12,7 @@ in a full autofit integration.
 Requirements:
     pip install nautilus-sampler
 """
+
 import time
 from pathlib import Path
 
@@ -23,6 +24,7 @@ from searches_minimal._metrics import MLTracker
 # --------------------------------------------------------------------------
 # Model
 # --------------------------------------------------------------------------
+
 
 class Gaussian:
     def __init__(self, centre=30.0, normalization=1.0, sigma=5.0):
@@ -52,6 +54,7 @@ data += np.random.normal(0.0, 0.01, data.shape)
 # --------------------------------------------------------------------------
 # Analysis
 # --------------------------------------------------------------------------
+
 
 class Analysis(af.Analysis):
     def __init__(self, data, noise_map):

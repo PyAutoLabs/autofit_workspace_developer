@@ -12,6 +12,7 @@ in a full autofit integration.
 Requirements:
     pip install dynesty
 """
+
 import time
 
 import numpy as np
@@ -20,6 +21,7 @@ import autofit as af
 # --------------------------------------------------------------------------
 # Model
 # --------------------------------------------------------------------------
+
 
 class Gaussian:
     def __init__(self, centre=30.0, normalization=1.0, sigma=5.0):
@@ -47,6 +49,7 @@ data += np.random.normal(0.0, 0.01, data.shape)
 # --------------------------------------------------------------------------
 # Analysis
 # --------------------------------------------------------------------------
+
 
 class Analysis(af.Analysis):
     def __init__(self, data, noise_map):
@@ -118,7 +121,9 @@ best_params = results.samples[best_idx]
 best_instance = model.instance_from_vector(vector=best_params)
 
 print("\n--- Dynesty Results ---")
-print(f"Best fit:  centre={best_instance.centre:.4f}  normalization={best_instance.normalization:.4f}  sigma={best_instance.sigma:.4f}")
+print(
+    f"Best fit:  centre={best_instance.centre:.4f}  normalization={best_instance.normalization:.4f}  sigma={best_instance.sigma:.4f}"
+)
 print(f"True:      centre=50.0000  normalization=25.0000  sigma=10.0000")
 print(f"Log evidence:  {results.logz[-1]:.2f}")
 print(f"\n--- Performance ---")

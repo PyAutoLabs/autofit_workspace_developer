@@ -13,6 +13,7 @@ Requirements:
     pip install git+https://github.com/yallup/nss.git
     (pulls handley-lab/blackjax fork with nested sampling support)
 """
+
 import time
 from pathlib import Path
 

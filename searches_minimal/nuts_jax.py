@@ -19,6 +19,7 @@ reports ``Log evidence: n/a``.
 Requirements:
     pip install blackjax
 """
+
 import time
 from pathlib import Path
 

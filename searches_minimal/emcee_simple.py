@@ -12,6 +12,7 @@ in a full autofit integration.
 Requirements:
     pip install emcee
 """
+
 import time
 
 import numpy as np
@@ -20,6 +21,7 @@ import autofit as af
 # --------------------------------------------------------------------------
 # Model
 # --------------------------------------------------------------------------
+
 
 class Gaussian:
     def __init__(self, centre=30.0, normalization=1.0, sigma=5.0):
@@ -47,6 +49,7 @@ data += np.random.normal(0.0, 0.01, data.shape)
 # --------------------------------------------------------------------------
 # Analysis
 # --------------------------------------------------------------------------
+
 
 class Analysis(af.Analysis):
     def __init__(self, data, noise_map):
@@ -133,7 +136,9 @@ stds = np.std(flat_samples, axis=0)
 labels = ["centre", "normalization", "sigma"]
 
 print("\n--- Emcee Results ---")
-print(f"Best fit:  centre={best_instance.centre:.4f}  normalization={best_instance.normalization:.4f}  sigma={best_instance.sigma:.4f}")
+print(
+    f"Best fit:  centre={best_instance.centre:.4f}  normalization={best_instance.normalization:.4f}  sigma={best_instance.sigma:.4f}"
+)
 print(f"True:      centre=50.0000  normalization=25.0000  sigma=10.0000")
 
 print("\nPosterior summary (median +/- 1 sigma):")
