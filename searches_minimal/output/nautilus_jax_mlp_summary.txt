@@ -1,0 +1,11 @@
+--- fast_gauss_10d ---
+config          wall s   nn s geom s shell s   evals     log Z     ESS  ev->ML
+sklearn          12.27   5.28   4.45    2.16   10200    -0.010 10048.5       1
+jax_mlp          38.01  28.33   4.49    4.57   10200    -0.025 10028.7       1
+jax_mlp_warm     33.17  23.89   5.95    2.92   10200    -0.011 10057.1       1
+
+--- gaussian_1d_data ---
+config          wall s   nn s geom s shell s   evals     log Z     ESS  ev->ML
+sklearn          68.98  37.30  18.11    2.86   16400   -57.455 10059.8    4278
+jax_mlp         152.04 118.01  15.44    4.37   17400   -57.460 10034.9    4418
+jax_mlp_warm    265.88 213.05  29.23    4.85   17100   -57.462 10062.2    4514

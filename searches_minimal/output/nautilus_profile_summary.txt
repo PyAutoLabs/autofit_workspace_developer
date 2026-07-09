@@ -1,0 +1,39 @@
+--- Nautilus Overhead Profile: gaussian_1d_data (3 params) ---
+n_dim / n_live:      3 / 200
+Wall time:           48.67 s
+Likelihood evals:    16400
+Raw likelihood:      0.256 ms/call (timed outside sampler, 1000 calls)
+
+--- Wall-time breakdown ---
+nn_train                  25.18 s    51.7 %   (26 emulator trainings, 26 ellipsoid-ensembles x 4 MLPs)
+bound_geometry            12.26 s    25.2 %   (26 bounds; ellipsoids/bound: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+sample_shell               2.53 s     5.2 %   (164 calls)
+evaluate_likelihood        6.95 s    14.3 %   (164 batched calls)
+residue                    1.75 s     3.6 %   (bookkeeping, shell updates)
+
+--- Quality (MLTracker contract) ---
+Max log L:           -38.1725
+Log evidence:        -57.4552
+ESS:                 10059.8
+Evals to ML:         4278
+Time to ML:          25.96 s
+
+--- Nautilus Overhead Profile: fast_gauss_10d ---
+n_dim / n_live:      10 / 200
+Wall time:           15.52 s
+Likelihood evals:    10200
+Raw likelihood:      0.005 ms/call (timed outside sampler, 1000 calls)
+
+--- Wall-time breakdown ---
+nn_train                   6.24 s    40.2 %   (5 emulator trainings, 5 ellipsoid-ensembles x 4 MLPs)
+bound_geometry             5.93 s    38.2 %   (5 bounds; ellipsoids/bound: [1, 1, 1, 1, 1])
+sample_shell               2.80 s    18.0 %   (102 calls)
+evaluate_likelihood        0.09 s     0.6 %   (102 batched calls)
+residue                    0.47 s     3.0 %   (bookkeeping, shell updates)
+
+--- Quality (MLTracker contract) ---
+Max log L:           -0.0039
+Log evidence:        -0.0102
+ESS:                 10048.5
+Evals to ML:         1
+Time to ML:          0.01 s
