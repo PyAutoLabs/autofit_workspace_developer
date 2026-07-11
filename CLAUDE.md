@@ -6,12 +6,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **autofit_workspace_developer** is the developer workspace for prototyping new PyAutoFit features, search-interface experiments, and minimal sampler examples. It is not a user-facing workspace — see `../autofit_workspace` for example scripts and tutorials, and `../autofit_workspace_test` for the integration test suite.
 
-Dependencies: `autofit`, plus optional sampler backends (`nautilus-sampler`, `nss`/`blackjax`, `dynesty`, `emcee`, `pyswarms`, `ultranest`). Python version: 3.11.
+Dependencies: `autofit`, plus optional sampler backends (`nautilus-sampler`, `blackjax`, `dynesty`, `emcee`, `pyswarms`, `ultranest`). Python version: 3.11.
 
 ## Workspace Structure
 
 ```
-searches_minimal/            Minimal direct-sampler examples (NSS, Nautilus, Dynesty,
+searches_minimal/            Minimal direct-sampler examples (Nautilus, Dynesty,
                              Emcee, LBFGS) that bypass the NonLinearSearch wrapper.
                              Outputs land in searches_minimal/output/.
 searches/                    Search-interface prototypes (pyswarms, ultranest).
@@ -25,7 +25,7 @@ config/                      YAML configuration files (non_linear/...).
 Scripts run from the repository root:
 
 ```bash
-python searches_minimal/nss_simple.py
+python searches_minimal/nautilus_jax.py
 ```
 
 Each `searches_minimal/*.py` writes a standardised summary block (best fit, max log L, log evidence, wall time, evaluation count, ESS, posterior sample count) both to stdout and to `searches_minimal/output/<script_name>_summary.txt` so runs can be diffed across samplers without re-running.
@@ -33,7 +33,7 @@ Each `searches_minimal/*.py` writes a standardised summary block (best fit, max 
 **Codex / sandboxed runs**: when running from Codex or any restricted environment, set writable cache directories so `numba` and `matplotlib` do not fail on unwritable home or source-tree paths:
 
 ```bash
-NUMBA_CACHE_DIR=/tmp/numba_cache MPLCONFIGDIR=/tmp/matplotlib python searches_minimal/nss_simple.py
+NUMBA_CACHE_DIR=/tmp/numba_cache MPLCONFIGDIR=/tmp/matplotlib python searches_minimal/nautilus_jax.py
 ```
 
 This workspace is often imported from `/mnt/c/...` and Codex may not be able to write to module `__pycache__` directories or `/home/jammy/.cache`, which can cause import-time `numba` caching failures without this override.
