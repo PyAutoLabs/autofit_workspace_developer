@@ -28,7 +28,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 import autofit as af
-from autoconf.dictable import to_dict
+from autofit import to_dict
 
 
 PACKAGE_ROOT = Path(__file__).parent

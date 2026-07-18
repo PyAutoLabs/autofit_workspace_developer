@@ -17,7 +17,7 @@ This includes the default priors for the lens model, check it out!
 """
 
 import os
-from autoconf import conf
+from autofit import conf
 
 cwd = os.getcwd()
 config_path = Path(cwd) / "projects" / "cosmology" / "config"

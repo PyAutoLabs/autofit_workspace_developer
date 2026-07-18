@@ -61,7 +61,7 @@ In this tutorial, we will:
 - **Chapter Wrap Up**: Summarize the completion of Chapter 1 and its applications to real astronomy.
 """
 
-# from autoconf import setup_notebook; setup_notebook()
+# from autofit import setup_notebook; setup_notebook()
 
 import numpy as np
 import matplotlib.pyplot as plt
