@@ -13,7 +13,7 @@ uses the profile data this package emits to rank scale-up follow-up tasks.
 ```bash
 source ~/Code/PyAutoLabs-wt/<task>/activate.sh
 # or, from a clean checkout:
-#   export PYTHONPATH=<PyAutoConf>:<PyAutoFit>:$PYTHONPATH
+#   export PYTHONPATH=<PyAutoNerves>:<PyAutoFit>:$PYTHONPATH
 
 cd autofit_workspace_developer
 
