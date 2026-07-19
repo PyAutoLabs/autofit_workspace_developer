@@ -10,7 +10,7 @@ import json
 import os
 from pathlib import Path
 
-from autoconf import conf
+from autofit import conf
 
 import autofit as af
 

@@ -19,7 +19,7 @@ classes and can be used as a drop-in replacement.
 
 import numpy as np
 
-from autoconf import conf
+from autofit import conf
 
 # Register the config directory shipped with this repo so that
 # UltraNest can find its YAML defaults.

@@ -14,7 +14,7 @@ autofit's base classes and can be used as drop-in replacements.
 
 import numpy as np
 
-from autoconf import conf
+from autofit import conf
 
 # Register the config directory shipped with this repo so that
 # PySwarmsGlobal/Local can find their YAML defaults.
