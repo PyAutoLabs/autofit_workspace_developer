@@ -194,7 +194,7 @@ def run_scenario(name, prior_transform, log_likelihood, n_dim, n_live=200):
     t0 = time.time()
     for _ in range(1000):
         log_likelihood(test_point)
-    raw_likelihood_ms = (time.time() - t0)
+    raw_likelihood_ms = time.time() - t0
 
     sampler = Sampler(
         prior=prior_transform,
@@ -222,7 +222,9 @@ def run_scenario(name, prior_transform, log_likelihood, n_dim, n_live=200):
     n_mlp_fits = TIMINGS.counts.get("nn_train", 0)
 
     def row(label, seconds, extra=""):
-        return f"{label:<22s} {seconds:>8.2f} s   {100 * seconds / wall:>5.1f} %   {extra}"
+        return (
+            f"{label:<22s} {seconds:>8.2f} s   {100 * seconds / wall:>5.1f} %   {extra}"
+        )
 
     summary = f"""\
 --- Nautilus Overhead Profile: {name} ---

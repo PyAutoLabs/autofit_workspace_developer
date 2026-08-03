@@ -103,8 +103,7 @@ def _train_ensemble(params_ensemble, x, y, weights):
             params = optax.apply_updates(params, updates)
             return (params, opt_state), None
 
-        (params, _), _ = jax.lax.scan(
-            step, (params, opt_state), None, length=N_STEPS)
+        (params, _), _ = jax.lax.scan(step, (params, opt_state), None, length=N_STEPS)
         return params
 
     return jax.vmap(train_one)(params_ensemble)
@@ -112,8 +111,7 @@ def _train_ensemble(params_ensemble, x, y, weights):
 
 @jax.jit
 def _predict_ensemble(params_ensemble, x):
-    return jnp.mean(jax.vmap(_forward, in_axes=(0, None))(params_ensemble, x),
-                    axis=0)
+    return jnp.mean(jax.vmap(_forward, in_axes=(0, None))(params_ensemble, x), axis=0)
 
 
 class JaxNeuralNetworkEmulator:
@@ -138,12 +136,12 @@ class JaxNeuralNetworkEmulator:
         weights[:n] = 1.0
 
         cls._seed_counter += 1
-        keys = jax.random.split(
-            jax.random.PRNGKey(cls._seed_counter), n_networks)
+        keys = jax.random.split(jax.random.PRNGKey(cls._seed_counter), n_networks)
         params = jax.vmap(lambda k: _init_params(k, n_dim))(keys)
 
         emulator.params = _train_ensemble(
-            params, jnp.array(x_pad), jnp.array(y_pad), jnp.array(weights))
+            params, jnp.array(x_pad), jnp.array(y_pad), jnp.array(weights)
+        )
         jax.block_until_ready(emulator.params)
         return emulator
 
@@ -201,8 +199,7 @@ def run_config(name, prior_transform, log_likelihood, n_dim, n_live=200):
     wall = time.time() - t_start
 
     points, log_w, log_l = sampler.posterior()
-    evals_to_ml, _ = tracker.finalise(max_log_l=float(np.max(log_l)),
-                                      tolerance=1.0)
+    evals_to_ml, _ = tracker.finalise(max_log_l=float(np.max(log_l)), tolerance=1.0)
 
     nn = TIMINGS.totals.get("nn_train", 0.0)
     bound = TIMINGS.totals.get("bound_compute", 0.0)
@@ -217,9 +214,11 @@ def run_config(name, prior_transform, log_likelihood, n_dim, n_live=200):
         ess=float(sampler.n_eff),
         evals_to_ml=evals_to_ml,
     )
-    print(f"  {name:<14s} wall={wall:6.2f} s  nn={nn:6.2f} s  "
-          f"shell={result['shell']:5.2f} s  logZ={result['log_z']:8.3f}  "
-          f"ESS={result['ess']:7.1f}  evals={result['n_evals']}")
+    print(
+        f"  {name:<14s} wall={wall:6.2f} s  nn={nn:6.2f} s  "
+        f"shell={result['shell']:5.2f} s  logZ={result['log_z']:8.3f}  "
+        f"ESS={result['ess']:7.1f}  evals={result['n_evals']}"
+    )
     return result
 
 
@@ -241,10 +240,13 @@ def format_rows(title, results):
 
 if __name__ == "__main__":
     scenarios = [
-        ("fast_gauss_10d", fast_prior_transform, fast_log_likelihood,
-         N_DIM_FAST),
-        ("gaussian_1d_data", gaussian_prior_transform, gaussian_log_likelihood,
-         model.prior_count),
+        ("fast_gauss_10d", fast_prior_transform, fast_log_likelihood, N_DIM_FAST),
+        (
+            "gaussian_1d_data",
+            gaussian_prior_transform,
+            gaussian_log_likelihood,
+            model.prior_count,
+        ),
     ]
 
     tables = []
@@ -252,15 +254,14 @@ if __name__ == "__main__":
         print(f"== {title} ==")
         results = []
         _use_sklearn_emulator()
-        results.append(
-            run_config("sklearn", prior_transform, log_likelihood, n_dim))
+        results.append(run_config("sklearn", prior_transform, log_likelihood, n_dim))
         _use_jax_emulator()
-        results.append(
-            run_config("jax_mlp", prior_transform, log_likelihood, n_dim))
+        results.append(run_config("jax_mlp", prior_transform, log_likelihood, n_dim))
         # Second JAX run reuses the padded-shape JIT cache — the steady-state
         # cost a long fit would see.
         results.append(
-            run_config("jax_mlp_warm", prior_transform, log_likelihood, n_dim))
+            run_config("jax_mlp_warm", prior_transform, log_likelihood, n_dim)
+        )
         tables.append(format_rows(title, results))
 
     output = "\n\n".join(tables) + "\n"

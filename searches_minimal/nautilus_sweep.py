@@ -52,8 +52,9 @@ def fast_log_likelihood_vectorized(params):
     return -0.5 * np.einsum("bi,ij,bj->b", d, _cov_inv, d)
 
 
-def run_config(name, prior_transform, log_likelihood, n_dim, n_live=200,
-               **sampler_kwargs):
+def run_config(
+    name, prior_transform, log_likelihood, n_dim, n_live=200, **sampler_kwargs
+):
     TIMINGS.totals.clear()
     TIMINGS.counts.clear()
     TIMINGS.per_call.clear()
@@ -62,12 +63,15 @@ def run_config(name, prior_transform, log_likelihood, n_dim, n_live=200,
     vectorized = sampler_kwargs.get("vectorized", False)
 
     if vectorized:
+
         def wrapped(params):
             log_l = log_likelihood(params)
             for value in np.atleast_1d(log_l):
                 tracker.record(float(value))
             return log_l
+
     else:
+
         def wrapped(params):
             log_l = log_likelihood(params)
             tracker.record(log_l)
@@ -115,9 +119,11 @@ def run_config(name, prior_transform, log_likelihood, n_dim, n_live=200,
             except Exception:
                 pass
 
-    print(f"  {name:<12s} wall={wall:6.2f} s  nn={nn:6.2f} s  "
-          f"logZ={result['log_z']:8.3f}  ESS={result['ess']:7.1f}  "
-          f"evals={result['n_evals']}")
+    print(
+        f"  {name:<12s} wall={wall:6.2f} s  nn={nn:6.2f} s  "
+        f"logZ={result['log_z']:8.3f}  ESS={result['ess']:7.1f}  "
+        f"evals={result['n_evals']}"
+    )
     return result
 
 

@@ -152,10 +152,7 @@ def test__init_iterations_per_quick_update_no_longer_warns(caplog):
     """
     with caplog.at_level("INFO"):
         af.NSS(iterations_per_quick_update=10)
-    assert not any(
-        "not yet wired" in record.message
-        for record in caplog.records
-    )
+    assert not any("not yet wired" in record.message for record in caplog.records)
 
 
 @requires_nss
@@ -207,7 +204,8 @@ def test__load_checkpoint_called_when_file_exists(tmp_path):
         "_load_checkpoint",
         return_value=(sentinel_state, [], jax.random.PRNGKey(0), 17),
     ) as mock_load, patch.object(
-        nss_search_module, "_blackjax",
+        nss_search_module,
+        "_blackjax",
     ) as mock_bjax, patch.object(
         nss_search_module,
         "_nss_finalise",

@@ -365,9 +365,8 @@ class NSS(abstract_nest.AbstractNest):
         # inversion-heavy lensing cells before this PR). ``chunk_size=None``
         # or ``chunk_size >= max(n_live, num_delete)`` keeps using upstream
         # ``blackjax.nss(...)`` bit-for-bit.
-        if (
-            self.chunk_size is not None
-            and self.chunk_size < max(self.n_live, self.num_delete)
+        if self.chunk_size is not None and self.chunk_size < max(
+            self.n_live, self.num_delete
         ):
             from ._chunked_nss import (
                 build_chunked_nss_algorithm,
@@ -453,7 +452,7 @@ class NSS(abstract_nest.AbstractNest):
         def _safe_ess(log_w_mean):
             log_w_mean = log_w_mean - log_w_mean.max()
             weights = jnp.exp(log_w_mean)
-            return float(weights.sum() ** 2 / (weights ** 2).sum())
+            return float(weights.sum() ** 2 / (weights**2).sum())
 
         ess = int(_safe_ess(log_w_mc.mean(axis=-1)))
         evals = int(

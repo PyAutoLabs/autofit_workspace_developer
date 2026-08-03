@@ -173,7 +173,9 @@ def test__samples_info_from_synthetic_internal():
 
     info = search.samples_info_from(search_internal=internal)
 
-    assert info["log_evidence"] == pytest.approx(float(internal.logZs.mean()), abs=1e-12)
+    assert info["log_evidence"] == pytest.approx(
+        float(internal.logZs.mean()), abs=1e-12
+    )
     assert info["log_evidence_error"] == pytest.approx(
         float(internal.logZs.std()), abs=1e-12
     )
