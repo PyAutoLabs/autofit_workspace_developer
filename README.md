@@ -1,10 +1,26 @@
 # autofit_workspace_developer
 
-Archived non-linear search implementations removed from
-[PyAutoFit](https://github.com/rhayes777/PyAutoFit). These searches are preserved
-here so they are not lost and can still be used by advanced users.
+Developer workspace for [PyAutoFit](https://github.com/PyAutoLabs/PyAutoFit):
+search prototypes, minimal sampler examples, expectation-propagation and graphical
+model experiments.
 
-## Searches
+## The `searches/` archive
+
+`searches/` holds non-linear search implementations that are **not** in PyAutoFit,
+either because they were removed from the library or because they have not been
+promoted into it. They are preserved here so they are not lost and can still be
+used by advanced users.
+
+A search lives in the archive only while PyAutoFit does not ship it. When a search
+is (re-)mainlined into PyAutoFit, its archive copy is deleted rather than kept in
+parallel, so the library is the one maintained implementation. NSS is an example:
+it was parked here and is now `af.NSS` in PyAutoFit.
+
+`searches_minimal/` is not part of the archive: it holds minimal scripts that call
+samplers directly, bypassing the `NonLinearSearch` wrapper, for prototyping and
+benchmarking.
+
+## Archived searches
 
 ### UltraNest
 
