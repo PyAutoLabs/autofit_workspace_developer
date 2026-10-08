@@ -16,7 +16,8 @@ Dependencies: `autofit`, plus optional sampler backends (`nautilus-sampler`, `bl
 searches_minimal/            Minimal direct-sampler examples (Nautilus, Dynesty,
                              Emcee, LBFGS) that bypass the NonLinearSearch wrapper.
                              Outputs land in searches_minimal/output/.
-searches/                    Search-interface prototypes (pyswarms, ultranest).
+searches/                    Archive of searches not in PyAutoFit (pyswarms, ultranest);
+                             a copy is deleted once its search is mainlined.
 projects/                    Example PyAutoFit projects (cosmology, ...).
 scripts/                     Tutorial-style developer scripts (howtofit).
 config/                      YAML configuration files (non_linear/...).
