@@ -4,14 +4,20 @@ from typing import Dict, Optional
 from autofit.database.sqlalchemy_ import sa
 
 from autofit.mapper.prior_model.abstract import AbstractPriorModel
-from autofit.non_linear.search.nest import abstract_nest
+from autofit.non_linear.search.abstract_search import NonLinearSearch
+from autofit.non_linear.search.posterior_kind import WEIGHTED
+from autofit.non_linear.search import capabilities as cap
 from autofit.non_linear.fitness import Fitness
 from autofit.non_linear.samples.sample import Sample
 from autofit.non_linear.samples.nest import SamplesNest
-from autofit.non_linear.test_mode import is_test_mode
 
 
-class UltraNest(abstract_nest.AbstractNest):
+class UltraNest(NonLinearSearch):
+    samples_cls = SamplesNest
+    posterior_kind = cap.PosteriorKind.WEIGHTED
+    produces_evidence = True
+    test_mode_budget = {"max_iters": 1, "max_ncalls": 1}
+
     __identifier_fields__ = (
         "draw_multiple",
         "ndraw_min",
@@ -109,6 +115,7 @@ class UltraNest(abstract_nest.AbstractNest):
             number_of_cores=number_of_cores,
             silence=silence,
             session=session,
+            initializer=WEIGHTED.nested_initializer_for(kwargs.pop("initializer", None)),
             **kwargs
         )
 
@@ -149,14 +156,7 @@ class UltraNest(abstract_nest.AbstractNest):
         self.region_filter = region_filter
         self.scale = scale
 
-        if is_test_mode():
-            self.apply_test_mode()
-
         self.logger.debug("Creating UltraNest Search")
-
-    def apply_test_mode(self):
-        self.max_iters = 1
-        self.max_ncalls = 1
 
     @property
     def search_kwargs(self):

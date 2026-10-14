@@ -6,10 +6,12 @@ from autofit.database.sqlalchemy_ import sa
 from autofit.mapper.prior_model.abstract import AbstractPriorModel
 from autofit.non_linear.fitness import Fitness
 from autofit.non_linear.initializer import AbstractInitializer
-from autofit.non_linear.search.mle.abstract_mle import AbstractMLE
+from autofit.non_linear.search.abstract_search import NonLinearSearch
+from autofit.non_linear.search.posterior_kind import POINT
+from autofit.non_linear.search.seed import initializer_rng
+from autofit.non_linear.search import capabilities as cap
 from autofit.non_linear.samples.sample import Sample
 from autofit.non_linear.samples.samples import Samples
-from autofit.non_linear.test_mode import is_test_mode
 
 
 class FitnessPySwarms(Fitness):
@@ -45,7 +47,10 @@ class FitnessPySwarms(Fitness):
         return np.asarray(figure_of_merit_list)
 
 
-class AbstractPySwarms(AbstractMLE):
+class AbstractPySwarms(NonLinearSearch):
+    posterior_kind = cap.PosteriorKind.POINT
+    test_mode_budget = {"iters": 1}
+
     def __init__(
         self,
         name: Optional[str] = None,
@@ -101,11 +106,13 @@ class AbstractPySwarms(AbstractMLE):
             An SQLalchemy session instance so the results of the model-fit are written to an SQLite database.
         """
 
+        self.clipper = POINT.clipper_for(kwargs.pop("clipper", None))
+
         super().__init__(
             name=name,
             path_prefix=path_prefix,
             unique_tag=unique_tag,
-            initializer=initializer,
+            initializer=POINT.initializer_for(initializer),
             iterations_per_quick_update=iterations_per_quick_update,
             iterations_per_full_update=iterations_per_full_update,
             number_of_cores=number_of_cores,
@@ -119,9 +126,6 @@ class AbstractPySwarms(AbstractMLE):
         self.social = social
         self.inertia = inertia
         self.iters = iters
-
-        if is_test_mode():
-            self.apply_test_mode()
 
         self.logger.debug("Creating PySwarms Search")
 
@@ -174,6 +178,7 @@ class AbstractPySwarms(AbstractMLE):
                 fitness=fitness,
                 paths=self.paths,
                 n_cores=self.number_of_cores,
+                rng=initializer_rng(self),
             )
 
             init_pos = np.zeros(shape=(self.n_particles, model.prior_count))
@@ -293,9 +298,6 @@ class AbstractPySwarms(AbstractMLE):
             sample_list=sample_list,
             samples_info=search_internal_dict,
         )
-
-    def apply_test_mode(self):
-        self.iters = 1
 
     def search_internal_from(self, model, fitness, bounds, init_pos):
         raise NotImplementedError()
