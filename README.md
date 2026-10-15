@@ -1,8 +1,13 @@
 # autofit_workspace_developer
 
 Developer workspace for [PyAutoFit](https://github.com/PyAutoLabs/PyAutoFit):
-search prototypes, minimal sampler examples, expectation-propagation and graphical
-model experiments.
+search prototypes and minimal sampler examples.
+
+The 1D-Gaussian expectation-propagation and graphical-model scale-up baselines that
+used to live in this repo's `ep` and `graphical` directories are now maintained in
+[autofit_profiling](https://github.com/PyAutoLabs/autofit_profiling) under
+`scripts/gaussian_1d_ep` (one `baseline.py` per method), with the campaign write-up in
+`wiki/campaigns/ep_graphical_baselines.md`.
 
 ## The `searches/` archive
 
