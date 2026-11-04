@@ -751,12 +751,10 @@ search = af.DynestyStatic(
 
 analysis = Analysis(data=data, noise_map=noise_map, psf=psf, grid=grid, mask=mask)
 
-print(
-    """
+print("""
     The non-linear search has begun running.
     This Jupyter notebook cell with progress once the search has completed - this could take a few minutes!
-    """
-)
+    """)
 
 result = search.fit(model=model, analysis=analysis)
 
@@ -849,12 +847,10 @@ model = af.Collection(light_0=af.Model(LightBulgey))
 # model.light_0.centre_1 = 0.0
 # model.light_0.axis_ratio = af.UniformPrior(lower_limit=0.7, upper_limit=1.0)
 
-print(
-    """
+print("""
     The non-linear search has begun running.
     This Jupyter notebook cell with progress once the search has completed - this could take a few minutes!
-    """
-)
+    """)
 
 result = search.fit(model=model, analysis=analysis)
 
