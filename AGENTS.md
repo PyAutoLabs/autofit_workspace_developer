@@ -1,8 +1,7 @@
 # AGENTS.md
 
 This file is for AI coding agents (Claude Code, Codex, Cursor, etc.) and humans
-working in this repository. It is the agent-agnostic source of truth; Claude Code
-loads it via the `@AGENTS.md` import in `CLAUDE.md`.
+working in this repository. Read this file directly for the canonical instructions.
 
 ## What This Repo Is
 
